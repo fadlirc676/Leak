@@ -26,25 +26,23 @@ public class BossMovement : MonoBehaviour
     {
         set
         {
-            bossHealth = value;
+            kuyHealth = value;
 
-            if (bossHealth <= 0)
+            if (kuyHealth <= 0)
             {
                 Destroy(gameObject);
             }
         }
         get
         {
-            return bossHealth;
+            return kuyHealth;
         }
     }
-    public float bossHealth = 2;
+    public float kuyHealth = 10;
 
     private bool isInChaseRange;
     private bool isInAttackRange;
     private bool hasLineOfSight;
-    public float chaseDuration = 5f; // Set the chase duration in seconds
-    private float chaseTimer;
 
     private Vector2 initialPosition;
     private bool isReturningToInitialPosition;
@@ -80,18 +78,11 @@ public class BossMovement : MonoBehaviour
                 anim.SetFloat("Vertical", dir.y);
             }
 
-            if (isInChaseRange && !isInAttackRange && !hasLineOfSight && !isHiding)
+            if (!isInChaseRange && !isInAttackRange && !hasLineOfSight && !isReturningToInitialPosition)
             {
-                MoveCharacter(movement);
-                chaseTimer += Time.deltaTime;
-
-                // Check if the chase duration has been reached
-                if (chaseTimer >= chaseDuration)
-                {
-                    // Stop chasing and reset the timer
-                    isInChaseRange = false;
-                    chaseTimer = 0f;
-                }
+                // Player is not in chase range, not in attack range, and not hiding.
+                // Start returning to the initial position.
+                isReturningToInitialPosition = true;
             }
 
             if (isReturningToInitialPosition)
@@ -132,7 +123,7 @@ public class BossMovement : MonoBehaviour
 
     void OnHit(float damage)
     {
-        bossHealth -= damage;
+        kuyHealth -= damage;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -140,6 +131,7 @@ public class BossMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             OnHit(1); // Enemy takes 1 damage
+            MoveToInitialPosition(); // Move to initial position after colliding with player
         }
     }
 
@@ -147,5 +139,12 @@ public class BossMovement : MonoBehaviour
     void ResetToInitialPosition()
     {
         transform.position = initialPosition;
+        isReturningToInitialPosition = false; // Reset the flag
+    }
+
+    // Call this method to initiate movement to the initial position
+    void MoveToInitialPosition()
+    {
+        isReturningToInitialPosition = true;
     }
 }
