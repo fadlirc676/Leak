@@ -154,17 +154,21 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Check for interaction with hiding spots
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Interactible?.Interact(this);
-            if (isHiding)
+            // Check if the player can interact with the current interactable
+            if (Interactible != null)
             {
-                EndHiding();
-            }
-            else
-            {
-                TryToHide();
+                Interactible.Interact(this);
+
+                if (isHiding)
+                {
+                    EndHiding();
+                }
+                else
+                {
+                    TryToHide();
+                }
             }
         }
 
