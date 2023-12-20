@@ -14,9 +14,9 @@ public class DialogueStage1 : MonoBehaviour
 
     private void Start()
     {
-        showDialogue(testDialogue);
         typewriterEffect = GetComponent<TypewriterEffect>();
         CloseDialogueBox();
+        showDialogue(testDialogue);
     }
 
     public void showDialogue(DialogueObject dialogueObject)
@@ -31,7 +31,7 @@ public class DialogueStage1 : MonoBehaviour
         foreach (string dialogue in dialogueObject.Dialogue)
         {
             yield return typewriterEffect.Run(dialogue, textLabel);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+            yield return new WaitForSeconds(1);
         }
 
         CloseDialogueBox();

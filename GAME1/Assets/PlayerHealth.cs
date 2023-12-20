@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 4;
+    public int maxHealth = 10;
     public int currentHealth;
     public healtBar HealtBar;
     public bool isDie;
@@ -78,6 +78,12 @@ public class PlayerHealth : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
+        {
+            TakeDamage(1);
+        }
+
+
+        if (collision.gameObject.tag == "Bullet")
         {
             TakeDamage(1);
         }

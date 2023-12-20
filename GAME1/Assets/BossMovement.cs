@@ -12,6 +12,8 @@ public class BossMovement : MonoBehaviour
     public bool shouldRotate;
     public bool isHiding;
 
+    public FireBullets fireBullets;
+
     public LayerMask whatIsPlayer;
     public LayerMask whatIsObstacle;
 
@@ -77,6 +79,14 @@ public class BossMovement : MonoBehaviour
                 anim.SetFloat("Horizontal", dir.x);
                 anim.SetFloat("Vertical", dir.y);
             }
+
+            if (fireBullets != null)
+            {
+                fireBullets.enabled = isInChaseRange && isInAttackRange;
+            }
+
+            hasLineOfSight = Physics2D.Raycast(transform.position, dir.normalized, losRadius, whatIsObstacle);
+
 
             if (!isInChaseRange && !isInAttackRange && !hasLineOfSight && !isReturningToInitialPosition)
             {

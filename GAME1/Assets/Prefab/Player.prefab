@@ -90,7 +90,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2380178100538935080}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3284b7a45e7aacd4a8b539fad8386ba0, type: 3}
   m_Name: 
@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 7704155979902621681}
   - component: {fileID: 550558055189116618}
   - component: {fileID: 7231565253490036397}
+  - component: {fileID: 7286838015444776425}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -196,10 +197,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00019009411, y: 0.0035372823}
+  m_Offset: {x: 0.00019011647, y: 0.11293098}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.15}
     oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
@@ -207,7 +208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13062385, y: 0.24584356}
+  m_Size: {x: 0.1306238, y: 0.2522785}
   m_EdgeRadius: 0
 --- !u!114 &1184458349826999094
 MonoBehaviour:
@@ -308,7 +309,7 @@ SpriteRenderer:
   m_SortingLayerID: -44025399
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd94e79fb143801448330b460cab1c41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32780594116213343b4fdc598e49e9d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -331,7 +332,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24c03d62109320499fdd02145fc246a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 10
   currentHealth: 0
   HealtBar: {fileID: 0}
   isDie: 0
+--- !u!81 &7286838015444776425
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8071503970157414110}
+  m_Enabled: 1

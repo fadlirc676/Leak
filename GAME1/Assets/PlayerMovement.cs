@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.Experimental.Rendering.Universal; // Import this namespace for Light2D
+using UnityEngine.SceneManagement;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -53,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
         // Assuming the Light2D component is in a child object of this GameObject
         playerLight = GetComponentInChildren<Light2D>();
         currentStamina = staminaMax;
-
         // Set isLighten to false
         isLighten = false;
 
@@ -97,7 +97,46 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
         if (DialogueBox.isOpen) return;
+        // Only allow changing isLighten value if not in Rumah1 scene
+        if (currentSceneName != "Rumah1")
+        {
+            //Input
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (isLighten)
+                {
+                    // If isLighten is true, set it back to false
+                    isLighten = false;
+
+                    // Disable the Light2D component
+                    if (playerLight != null)
+                    {
+                        playerLight.enabled = false;
+                    }
+
+                    // Trigger your animation or reset any other related variables
+                    animator.SetBool("isLighten", isLighten);
+                }
+                else
+                {
+                    // If isLighten is false, set it to true
+                    isLighten = true;
+
+                    // Enable the Light2D component
+                    if (playerLight != null)
+                    {
+                        playerLight.enabled = true;
+                    }
+
+                    // Trigger your animation or perform other actions related to right mouse button click
+                    animator.SetBool("isLighten", isLighten);
+                }
+            }
+        }
         //Input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -122,45 +161,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isLighten)
-            {
-                // If isLighten is true, set it back to false
-                isLighten = false;
-
-                // Disable the Light2D component
-                if (playerLight != null)
-                {
-                    playerLight.enabled = false;
-                }
-
-                // Trigger your animation or reset any other related variables
-                animator.SetBool("isLighten", isLighten);
-            }
-            else
-            {
-                // If isLighten is false, set it to true
-                isLighten = true;
-
-                // Enable the Light2D component
-                if (playerLight != null)
-                {
-                    playerLight.enabled = true;
-                }
-
-                // Trigger your animation or perform other actions related to right mouse button click
-                animator.SetBool("isLighten", isLighten);
-            }
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             // Check if the player can interact with the current interactable
-            if (Interactible != null)
-            {
-                Interactible.Interact(this);
-
+            Interactible?.Interact(this);
                 if (isHiding)
                 {
                     EndHiding();
@@ -169,7 +175,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     TryToHide();
                 }
-            }
         }
 
         animator.SetFloat("Speed", movement.sqrMagnitude); 

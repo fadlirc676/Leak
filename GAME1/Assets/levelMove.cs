@@ -22,4 +22,11 @@ public class LevelMove_Ref : MonoBehaviour
             SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
         }
     }
+
+    // Method to be called when the player interacts with the lighter
+    public void MoveToNextLevel()
+    {
+        print("Switching Scene to " + sceneBuildIndex);
+        SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
+    }
 }

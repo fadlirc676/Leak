@@ -7,6 +7,6 @@ public class CutSceneController : MonoBehaviour
 {
     void OnEnable()
     {
-        SceneManager.LoadScene("Scene 1", LoadSceneMode.Single);
+        SceneManager.LoadScene("Rumah1", LoadSceneMode.Single);
     }
 }
