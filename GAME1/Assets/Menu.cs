@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("Scene 1");
+        SceneManager.LoadScene("CutScene");
     }
 
     public void BackToMainMenu()
